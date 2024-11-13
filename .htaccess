@@ -1,0 +1,25 @@
+# deny most common except .php
+<FilesMatch "\.(inc|tpl|h|ihtml|sql|ini|conf|class|bin|spd|theme|module)$">
+deny from all
+</FilesMatch>
+                                
+<IFModule mod_rewrite.c>
+RewriteEngine on                                                     
+RewriteRule ^index.html index.php
+RewriteRule ^rss.xml rss.php
+RewriteRule ^rss-([0-9]*).xml rss.php?cat=$1
+RewriteRule ^rashrss-([0-9]*).xml rss.php?id=$1
+RewriteRule ^rate.html rate.php
+RewriteRule ^author-([0-9]*).html index.php?module=cat&userid=$1
+RewriteRule ^page-([0-9]*) index.php?page=$1
+RewriteRule ^extra-([0-9]*).html index.php?module=extra&id=$1
+RewriteRule ^cat-([0-9]*).html index.php?module=cat&catid=$1
+RewriteRule ^cat-([0-9]*)-page-([0-9]*).html index.php?module=cat&catid=$1&page=$2
+RewriteRule ^post-([0-9]*).html index.php?module=cat&postid=$1
+RewriteRule ^memberlist.html index.php?module=member&action=list
+RewriteRule ^user-([0-9]*).html index.php?module=cat&userid=$1
+RewriteRule ^user-([0-9]*)-page-([0-9]*).html index.php?module=cat&userid=$1&page=$2
+RewriteRule ^register.html index.php?module=member&action=register
+RewriteRule ^contact.html index.php?module=contact
+
+</IFModule>

@@ -1,0 +1,254 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="fa">
+<link rel="stylesheet" type="text/css" href="images/main.css">
+<title>نصب سيستم مديريت محتواي راش -- نسخه 3</title>
+<script language="javascript" type="text/javascript">
+function EnableSmtpFields(Status)
+{
+	InstallFrm.SmtpHost.disabled = !Status;
+	InstallFrm.SmtpUser.disabled = !Status;
+	InstallFrm.SmtpPassword.disabled = !Status;
+
+	if(Status)
+		InstallFrm.SmtpHost.focus();
+}
+
+function ShowHelp(HelpID)
+{
+	HelpDiv = document.getElementById("Help");
+	switch (HelpID)
+	{
+		case 1 :
+				HelpDiv.innerHTML= 'تنظیمات سیستم از قبیل عنوان سایت,وضعیت بلوک ها و غیره در این فایل قرار می گیرند.<br>سیستم برای نصب باید اجازه دسترسی به این فایل را داشته باشد. ';
+			break;
+
+		case 2 :
+				HelpDiv.innerHTML= 'تنظیمات دیتابیس (نام کاربری و ..) در این فایل قرار می گیرند.<br>سیستم برای نصب باید اجازه دسترسی به این فایل را داشته باشد.';
+			break;
+
+		case 3 :
+				HelpDiv.innerHTML= 'سیستم برای شناسایی کاربران عضو از session ها استفاده می کند.<br>سیستم برای نصب به session ها نیازمند است.<br>ممكن است سيستم در مورد فعال بودن session ها اشتباه كند.مراحل نصب را ادامه دهيد.';
+			break;
+
+		case 4 :
+				HelpDiv.innerHTML= 'نام هاست - معمولا localhost می باشد. در غیر اینصورت می توانید نام هاست خود را از مدیر سرور و مرکز پشتیبانی سرور خود جویا شوید.';
+			break;
+
+		case 5 :
+				HelpDiv.innerHTML= 'نام کاربری - کلمه عبور - نام بانک اطلاعاتی.  -- [ <blink><a href="http://www.rashcms.com/?redirect=database">آموزش تصویری </a></blink> ]--';
+			break;
+
+		case 6 :
+				HelpDiv.innerHTML= 'آدرس محل نصب- این آدرس را به طور کامل وارد کنید مثلا <div dir=ltr>http://www.you.com/  یا http://www.you.com/sth/</div>توجه : حتما / پاياني را قرار دهيد';
+			break;
+			case 7 :
+				HelpDiv.innerHTML= 'نام کاربری - کلمه عبور : نام کاربری و کلمه عبور مورد نیاز جهت ورود به پنل مدیریت.';
+			break;
+			case 8 :
+				HelpDiv.innerHTML= 'در صورتيكه نسخه 2 سيستم راش را نصب كرده ايد حتما "بروز رساني" را انتخاب نماييد تا اطلاعات پيشين شما حفظ گردد.';
+			break;
+		default : HelpDiv.innerHTML= '&nbsp;برای نمایش راهنما بر روی علامت <font color="#0000FF">؟</font> کنار هر قسمت کلیک نمایید.';
+
+	}/*End of Switch*/
+
+	return false;
+}
+</script>
+<!-- IF Step_1 --><script  type="text/javascript">
+<!--
+function check() {
+	// form validation check
+	var formValid=false;
+	var f = document.form;
+	if ( f.db_host.value == '' ) {
+		alert('لطفا يك نام هاست صحيح و درست را وارد نماييد \n معمولا localhost');
+		f.db_host.focus();
+		formValid=false;
+	} else if ( f.db_user.value == '' ) {
+		alert('لطفا نام كاربري و يوزر ديتابيس را وارد نماييد');
+		f.db_user.focus();
+		formValid=false;
+	} else if ( f.db_name.value == '' ) {
+		alert('لطفا نام ديتابيس خود را وارد نماييد');
+		f.db_name.focus();
+		formValid=false;
+		} else if ( f.admin_user.value == '' ) {
+		alert('شما باید یک نام کاربری انتخاب کنید \n example:admin');
+		f.admin_user.focus();
+		formValid=false;
+		} else if ( f.email.value == '' ) {
+		alert('لطفا پست الكترونيك خود را وارد كنيد. \n example:user@test.com');
+		f.email.focus();
+		formValid=false;
+
+		} else if ( f.admin_pass.value == '' ) {
+		alert('کلمه عبور مدریت را وارد نکرده اید');
+		f.admin_pass.focus();
+		formValid=false;
+		} else if ( confirm('آيا شما مطمين هستيد كه اطلاعاتي كه وارد نموديد صحيح و كامل ميباشند؟')) {
+		formValid=true;
+	}
+
+	return formValid;
+}
+//--></script><!-- ENDIF Step_1 -->
+<style type="text/css">
+.style1 {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div align="center">
+<div class="install">
+<table cellpadding="0"  cellspacing="3" width="750" height="100">
+	<tr>
+		<td height="92" width="744" valign="top" >
+<img border="0" src="images/install.png" width="348" height="100" align="right"><img border="0" src="images/logo.png" width="207" height="63" align="left">
+
+		</td>
+	</tr>
+	<tr>
+		<td height="4" width="744" valign="top" >
+
+		</td>
+	</tr>
+	<tr>
+		<td height="23" width="744" valign="top" >
+		<div align="center">
+		<div class="install_in">
+		<center>
+		<!-- IF Agree -->
+		<table dir=rtl class=jp-tbl width="85%"><tr><td class="item"><strong>
+			توافق نامه&nbsp; :</strong></td></tr><tr><td class="item">
+			<hr color="#84D7FF" size="1">
+						سيستم مديريت محتواي راش ( RashCMS ) ابزاري 
+									رايگان براي ايجاد سايت با محتواي ديناميك مي 
+									باشد.<br>قبل از نصب و هر گونه استفاده از 
+									سيستم لازم است قوانين استفاده از سيستم را 
+									مطالعه و قبول نماييد :<br>1. مسئوليت استفاده 
+									از سيستم تماما به عهده شما بوده و راش سي ام 
+									اس هيچ گونه مسئوليتي در قبال استفاده ناصحيح 
+									از سيستم ندارد.<br>2. راش سي ام اس يك نر 
+									افزار كاملا ايراني مي باشد ، لذا كليه 
+									كاربران ملزم به رعايت قوانين نظام جمهوري 
+									اسلامي ايران مي باشند.<br>3. اين نرم افزار 
+									كاملا رايگان بوده و هر گونه فروش نسخه يا 
+									نسخه هاي ويرايش شده از سيستم ممنوع مي باشد. 
+									توجه داشته باشيد كه شما مي توانيد در قبال 
+									ماژول هاي برنامه نويسي شده براي سيستم و نه 
+									خود سيستم هزينه مطالبه كنيد اما اين مورد نيز 
+									بايد قبلا با تيم مديريت راش هماهنگ شده باشد.<br>
+									4. اين نرم افزار رايگان بوده و شامل هيچ گونه 
+									گارانتي يا ضمانتي نمي باشد.<br>5. استفاده از 
+				سيستم به معني پذيرش كليه قوانين ذكر شده و قوانين مندرجج در سايت
+				
+				<a href="http://www.rashcms.com" target="_blank">سيستم مديريت 
+				محتواي راش</a> هستند.اين قوانين ممكن است تغيير كنند لذا كليه 
+				كاربران مي بايست هر چند مدت جهت آگاهي از آخرين تغييرات به وب 
+				سايت&nbsp; سيستم به نشاني <span lang="en-us">
+				<a href="http://www.rashcms.com" target="_blank">www.rashcms.com</a></span> 
+				مراجعه نمايند.<br>
+				<center><a href="http://www.rashcms.com" target="_blank">وب سايت سيستم 
+				مديريت محتواي راش </a>-- 
+				<a href="http://www.forum.rashcms.com" target="_blank">انجمن 
+				پشتيباني راش سي ام اس </a>--
+				<a href="http://www.rashcms.ir" target="_blank">سامانه نظر سنجي 
+				راش</a>&nbsp; --
+				<a href="http://www.rashcms.ir/about" target="_blank">درباره راش</a><br><br><br><br></center><center><form action=index.php method=post>
+					<input name="accpet" type="submit"  value="قبول قوانين"/></form></center></td></tr></table>
+		<!-- ENDIF Agree -->
+		<!-- IF Step_0 --><table dir=rtl class=jp-tbl width="85%"><tr><td width="29%" class="item">نسخه php</td><td width="43%" align="left"><center>
+								[phpver]</center></td></tr><tr><td>پشتيباني از XML </td><td><center>
+								[xml]</center></td></tr><tr><td>پشتيباني از MYSQL </td><td><center>
+								[MySql]</center></td></tr><tr><td valign="top" class="item">دسترسي به فايل db.config.php <font color="#008000"><b><a href="#" onclick="return(ShowHelp(2));">
+		<font color="#008000">؟</font></a></b></font></td><td><center>[dbconfig]</center></td></tr><tr><td class="item">ذخيره سازي Session <font color="#008000"><b><a href="#" onclick="return(ShowHelp(3));">
+		<font color="#008000">؟</font></a></b></font></td><td align="left" valign="top"><center>
+								[session]</center></td></tr><tr><td class="item" colspan="2"><span lang="en-us"><center>
+								[register_globals]</center></span></td></tr><tr><td class="item" colspan="2">
+			<hr color="#84D7FF" size="1">
+								<center><form action=index.php method=post><input name="next" type="submit"  value="مرحله بعد"/></form></center></td></tr></table><!-- ENDIF Step_0 --><!-- IF Step_1 --><!-- IF Error --><div class=red style="width:80%">
+						[Msg]</div><!-- ENDIF Error --><table dir=rtl class=jp-tbl width="85%"><form action="index.php" method="post" name="form" id="form" onsubmit="return check();"><tr><td width="72%" class="item" colspan="3"><center><b>اطلاعات پایگاه داده</b></center></td></tr><tr><td>نام هاست (<span lang="en-us">Host</span>)<span lang="en-us">
+		</span><font color="#008000"><b><a href="#" onclick="return(ShowHelp(4));">
+		<font color="#008000">؟</font></a></b></font></td><td><center>
+							<input  type="text" name="db_host" size="20" value="localhost" dir="ltr" /></center></td><td>معمولا <span lang="en-us">localhost </span>می باشد.<span lang="en-us"> </span></td></tr><tr><td>نام کاربری پایگاه داده<font color="#008000"><b><span lang="en-us">
+			</span><a href="#" onclick="return(ShowHelp(5));">
+		<font color="#008000">؟</font></a></b></font></td><td><center>
+				<input type="text" name="db_user" size="20" dir="ltr" /></center></td><td>در لوکال معمولا <span lang="en-us">root</span> می باشد.</td></tr><tr><td valign="top" class="item">کلمه عبور پایگاه داده<font color="#008000"><b><span lang="en-us">
+		</span><a href="#" onclick="return(ShowHelp(5));">
+		<font color="#008000">؟</font></a></b></font></td><td><center>
+				<input  type="text" name="db_pass" size="20" dir="ltr" /></center></td><td>در لوکال معمولا تهی می باشد.</td></tr><tr><td valign="top" class="item">نام بانک اطلاعاتی<font color="#008000"><b><span lang="en-us">
+		</span><a href="#" onclick="return(ShowHelp(5));">
+		<font color="#008000">؟</font></a></b></font></td><td><p align="right"><center>
+				<input  type="text" name="db_name" size="20" dir="ltr" /></center></td><td><span lang="en-us">[</span><a target="_blank" href="http://rashcms.com/">اطلاعات بیشتر</a><span lang="en-us">]</span></td></tr>
+								<tr>
+									<td class="item" colspan="3"><center><b>آدرس 
+									سایت</b></center></td>
+								</tr>
+								<tr><td class="item">آدرس سایت:<font color="#008000"><b><span lang="en-us">
+									</span><a href="#" onclick="return(ShowHelp(6));">
+		<font color="#008000">؟</font></a></b></font></td><td class="item"><center>
+								<input dir=ltr  type="text" name="site" size="20" /></center></td><td>&nbsp;مثلا
+								<span dir=ltr lang="en-us">www.sth.com/</span> یا
+								<span lang="en-us">/www.sth.com/you</span></td></tr><tr><td class="item" colspan="3"><center><b>اطلاعات پنل مدیریت</b></center></td></tr><tr><td class="item">نام کاربری مدیر<span lang="en-us">
+		</span><font color="#008000"><b><a href="#" onclick="return(ShowHelp(7));">
+		<font color="#008000">؟</font></a></b></font></td><td class="item"><center>
+			<input  type="text" name="admin_user" size="20" dir="ltr" /></center></td><td class="item">&nbsp;شامل حروف انگلیسی و اعداد</td></tr><tr><td class="item">کلمه عبور مدیر<span lang="en-us">
+		</span><font color="#008000"><b><a href="#" onclick="return(ShowHelp(7));">
+		<font color="#008000">؟</font></a></b></font></td><td class="item"><center>
+				<input  type="text" name="admin_pass" size="20" dir="ltr" /></center></td><td class="item">شامل حروف انگلیسی،اعداد و کاراکتر های ویژه</td></tr>
+						<tr><td class="item">پست الكترونيك مدير :</td>
+							<td class="style1">
+							<input  type="text" name="email" size="20" dir="ltr" /></td><td class="item">
+							&nbsp;</td></tr>
+						<tr>
+							<td class="item">عمليات:<font color="#008000"><b><span lang="en-us">
+									</span><a href="#" onclick="return(ShowHelp(8));">
+		<font color="#008000">؟</font></a></b></font></td><td class="item"><center>
+								<select name="rashaction" class="select" size="1">
+<option value="install" selected>نصب</option>
+<option value="update">بروز رساني</option>
+</select></center></td><td>&nbsp;</td>
+							</tr>
+						<tr>
+							<td class="item" colspan="3">» در صورت بروز رساني 
+							نام كاربري و رمز عبور مديريت تغيير نخواهند كرد.</td>
+							</tr>
+	<tr><td class="item" colspan="3"><center>
+<div class=red><blink>تذكر مهم:</blink>
+در صورتي كه نسخه قبلي سيستم راش&nbsp; ( 2 ) را نصب كرده ايد حتما بروز رساني را انتخاب نماييد.در غير اينصورت نصب را انتخاب كنيد.</div></center></td></tr>	
+		<tr><td class="item" colspan="3"><center><input name="require2" type="submit"  value="مرحله بعد"></center></td></tr></Form></table><!-- ENDIF Step_1 --><!-- IF Step_2 --><table dir=rtl class=jp-tbl width="85%"><tr><td width="72%" class="item">جداول بانک اطلاعاتی با موفقیت ساخته شد.<br>برای ادامه نصب نیاز به نوشتن بر روی فایل config.db.php می باشد.<br><!-- IF Config --><font color="#FF0000">سیستم قادر به نوشتن بر روی این فایل&nbsp; نیست.</font><br>در مرحله بعد کدي 
+		به شما داده خواهد شد که باید به صورت دستی آن را در <span lang="en-us">db.config.php</span> که&nbsp; 
+		در پوشه <span lang="en-us">includes</span> موجود هستن وارد کنید.در صورتی که می خواهید این کار به صورت اتوماتیک صورت گیرد باید اجازه نوشتن بر روی این فایل را به برنامه بدهید.<!-- ENDIF Config --><!-- IF Yconfig --><br><font color="green">سیستم قادر به نوشتن بر روی این فایل می باشد.</font><br>با کلیک روی دکمه زیر برنامه به طور اتوماتیک تنظیمات مربوطه را انجام خواهد داد.<!-- ENDIF Yconfig --></td></tr><tr><td class="item"><center><form action=index.php method=post><input name="continue" type=hidden  value="1"/><input name="sub" type="submit"  value="مرحله بعد"/><input type="hidden" name="require3" value="1"></form></center></td></tr></table><!-- ENDIF Step_2 --><!-- IF Step_3 -->
+						[alert]<table dir=rtl class=jp-tbl width="85%"><tr><td width="72%" class="item"><!-- IF Config -->کد زیر را در فایل db.config.php موجود در پوشه includes کپی کنید:<br><center></center><textarea rows="18" name="S1" class="TEXT" cols="66" dir="ltr" onclick="this.select();">[dbconfig_text]</textarea><!-- ENDIF Config --><!-- IF Yconfig --><br><font color="#008000">برنامه با موفقیت نصب شد!</font><br>برخی تنظیمات سیستم به طور پیشفرض در نظر گرفته شد.برای اعمال&nbsp; تنظیمات به صورت کامل به پنل مدیریت مراجعه کنید.<!-- ENDIF Yconfig --><br><center><b>
+			<a href="../manager">ورود به کنترل پنل مدیریت</a></b> | <b> 
+			<a href="../index.php">ورود به صفحه نخست</a></b><p><b>
+							<a target="_blank" title="سیستم مدیریت محتوای راش" href="http://rashcms.com/"><font color="#008000">[ 
+							تیم پشتیبانی و برنامه نویس سیستم ]</font></a><span lang="en-us"><font color="#008000"> 
+							- [</span><a target="_blank" href="http://forum.rashcms.com/"><font color="#008000">انجمن 
+							پشتيباني سيستم</font></a><span lang="en-us">]</span></font></b></p></center><br>
+							<span lang="en-us">&nbsp;</span><font color="#FF0000"><b>»</b></font>
+							<font color="#008000">لطفا نظرات و انتقادات خود را 
+							از</font> <a href="http://rashcms.com/contact.html">
+							اینجا</a>
+							<font color="#008000">ارسال نمایید.</font><br><div class=red><blink>هشدار:</blink><br>جهت اطمینان بیشتر هر چه سریعتر فایل install.php را حذف نمایید.</div></td></tr></table><!-- ENDIF Step_3 --></center>
+		
+		</div>
+		</div>
+		<div id=Helpm class=reglink><b>راهنما:</b><br><div id=Help><center> برای نمایش راهنما بر روی علامت 
+		<font color="#008000"><b>؟</b></font> کنار هر قسمت کلیک نمایید.</div></center></div>
+		</td>
+	</tr>
+	<tr>
+		<td height="50" width="744" valign="bottom" >
+		<p align="center"><p align="center">كليه حقوق براي
+		<a href="http://www.rashcms.com" target="_blank">راش سي ام اس</a> محفوظ است.
+			<a href="http://www.mihanphp.com" target="_blank">ميهن پي اچ پي</a></td>
+	</tr>
+</table>
+</div>
+</div>
+</body>
+</html>

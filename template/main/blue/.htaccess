@@ -1,0 +1,10 @@
+IndexIgnore *
+
+<FilesMatch ".*">
+Order deny,allow
+Deny from all
+</FilesMatch>
+<FilesMatch "\.(jpg|jpeg|gif|tif|png|bmp|html|css|js|swf|JPG|JPEG|GIF|TIF|PNG|BMP|HTML|CSS|JS|SWF)$">
+Order deny,allow
+allow from all
+</FilesMatch>
